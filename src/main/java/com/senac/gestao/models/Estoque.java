@@ -1,26 +1,34 @@
 package com.senac.gestao.models;
 
+import com.senac.gestao.models.enums.TipoArmazemEnum;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.PositiveOrZero;
+import jakarta.validation.constraints.Size;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 
 import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "estoques")
 @Data
 @SuperBuilder
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 public class Estoque extends BaseEntity {
 
     @NotBlank
     @Size(max = 100)
     private String nome;
+
+    private String descricao;
 
     @Enumerated(EnumType.STRING)
     private TipoArmazemEnum tipoArmazem;
@@ -31,10 +39,6 @@ public class Estoque extends BaseEntity {
     @PositiveOrZero
     private BigDecimal capacidadeUsada;
 
-    @OneToMany(mappedBy = "estoque", cascade = CascadeType.ALL)
-    @Builder.Default
-    private List<MovimentacaoEstoque> movimentacoes = new ArrayList<>();
-
     @ManyToMany
     @JoinTable(
             name = "estoque_produto",
@@ -44,7 +48,7 @@ public class Estoque extends BaseEntity {
     @Builder.Default
     private Set<Produto> produtos = new HashSet<>();
 
-    public BigDecimal calcularOcupacao() {
-        return capacidadeUsada.divide(capacidadeTotal, 2, RoundingMode.HALF_UP);
-    }
+    @OneToMany(mappedBy = "estoque", cascade = CascadeType.ALL)
+    @Builder.Default
+    private List<MovimentacaoEstoque> movimentacoes = new ArrayList<>();
 }
