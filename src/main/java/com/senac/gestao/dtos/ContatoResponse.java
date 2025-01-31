@@ -1,4 +1,16 @@
 package com.senac.gestao.dtos;
 
-public class ContatoResponse {
-}
+import org.hibernate.validator.constraints.UUID;
+
+import java.time.LocalDateTime;
+
+public record ContatoResponse(
+        UUID id,
+        String tipo,
+        String valor,
+        String observacao,
+        boolean principal,
+        String horarioPermitido,
+        LocalDateTime dataCriacao
+) {}
+

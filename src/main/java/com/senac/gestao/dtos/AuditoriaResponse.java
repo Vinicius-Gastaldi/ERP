@@ -1,4 +1,15 @@
 package com.senac.gestao.dtos;
 
-public class AuditoriaResponse {
-}
+import org.hibernate.validator.constraints.UUID;
+
+import java.time.LocalDateTime;
+
+public record AuditoriaResponse(
+        UUID id,
+        String acao,
+        String entidade,
+        String dadosAntigos,
+        String dadosNovos,
+        UUID usuarioId,
+        LocalDateTime dataCriacao
+) {}
