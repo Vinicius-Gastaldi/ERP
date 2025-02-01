@@ -1,6 +1,6 @@
 package com.senac.gestao.dtos;
 
-import org.hibernate.validator.constraints.UUID;
+import java.util.UUID;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;

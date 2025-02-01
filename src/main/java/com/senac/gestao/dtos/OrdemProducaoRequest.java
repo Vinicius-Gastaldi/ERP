@@ -2,7 +2,7 @@ package com.senac.gestao.dtos;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Positive;
-import org.hibernate.validator.constraints.UUID;
+import java.util.UUID;
 
 import java.time.LocalDateTime;
 

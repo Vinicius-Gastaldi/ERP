@@ -1,4 +1,3 @@
-// LinhaProducaoResponse.java
 package com.senac.gestao.dtos;
 
 import java.math.BigDecimal;
