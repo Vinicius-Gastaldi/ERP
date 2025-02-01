@@ -11,6 +11,5 @@ public interface EnderecoService {
     EnderecoResponse atualizar(UUID id, EnderecoRequest request);
     EnderecoResponse buscarPorId(UUID id);
     Page<EnderecoResponse> listarPorPessoa(UUID pessoaId, Pageable pageable);
-    void tornarPrincipal(UUID enderecoId);
     void deletar(UUID id);
 }

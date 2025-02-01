@@ -17,6 +17,5 @@ public interface ProdutoService {
     Page<ProdutoResponse> listarPorCategoria(CategoriaProdutoEnum categoria, Pageable pageable);
     List<ProdutoResponse> listarParaReposicao();
     List<ProdutoResponse> listarExcedentes();
-    void ajustarEstoque(UUID produtoId, Integer quantidade);
     void deletar(UUID id);
 }

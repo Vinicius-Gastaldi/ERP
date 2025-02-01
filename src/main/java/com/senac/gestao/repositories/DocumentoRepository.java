@@ -1,24 +1,17 @@
 package com.senac.gestao.repositories;
 
 import com.senac.gestao.models.Documento;
-import org.hibernate.validator.constraints.UUID;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @Repository
-public interface DocumentoRepository extends BaseRepository<Documento, UUID> {
+public interface DocumentoRepository extends JpaRepository<Documento, UUID> {
+    Page<Documento> findByPessoaId(UUID pessoaId, Pageable pageable);
 
-    Optional<Documento> findByNumero(String numero);
-
-    @Query("SELECT d FROM Documento d WHERE " +
-            "d.dataValidade >= CURRENT_DATE AND " +
-            "d.principal = true AND " +
-            "d.pessoa.id = :pessoaId")
-    List<Documento> findDocumentosValidosPrincipais(
-            @Param("pessoaId") UUID pessoaId
-    );
+    Optional<Documento> findById(UUID id);
 }

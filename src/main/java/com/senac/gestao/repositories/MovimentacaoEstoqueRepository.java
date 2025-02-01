@@ -9,10 +9,17 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 @Repository
 public interface MovimentacaoEstoqueRepository extends BaseRepository<MovimentacaoEstoque, UUID> {
+
+    @Query("SELECT m FROM MovimentacaoEstoque m WHERE " +
+            "m.tipo = 'ENTRADA' AND " +
+            "m.produto.id = :produtoId")
+    Page<MovimentacaoEstoque> findEntradasPorProduto(
+            @Param("produtoId") UUID produtoId,
+            Pageable pageable
+    );
 
     @Query("SELECT m FROM MovimentacaoEstoque m WHERE " +
             "m.estoque.id = :estoqueId AND " +
@@ -22,12 +29,5 @@ public interface MovimentacaoEstoqueRepository extends BaseRepository<Movimentac
             @Param("inicio") LocalDateTime inicio,
             @Param("fim") LocalDateTime fim,
             Pageable pageable
-    );
-
-    @Query("SELECT m FROM MovimentacaoEstoque m WHERE " +
-            "m.tipo = 'ENTRADA' AND " +
-            "m.produto.id = :produtoId")
-    List<MovimentacaoEstoque> findEntradasPorProduto(
-            @Param("produtoId") UUID produtoId
     );
 }
